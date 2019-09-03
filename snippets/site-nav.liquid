@@ -54,7 +54,8 @@
             </div>
 
           {% else %}
-            <ul>
+          {% comment %} Remove navigation bar {% endcomment %}
+            {% comment %} <ul>
               {% for childlink in link.links %}
                 <li>
                   <a href="{{ childlink.url }}"
@@ -65,19 +66,19 @@
                   </a>
                 </li>
               {% endfor %}
-            </ul>
+            </ul> {% endcomment %}
           {% endif %}
         </div>
       </li>
     {% else %}
-      <li {% if link.active %} class="site-nav--active"{% endif %}>
+      {% comment %} <li {% if link.active %} class="site-nav--active"{% endif %}>
         <a href="{{ link.url }}"
           class="site-nav__link site-nav__link--main{% if link.active %} site-nav__link--active{% endif %}"
           {% if link.current %} aria-current="page"{% endif %}
         >
           <span class="site-nav__label">{{ link.title | escape }}</span>
         </a>
-      </li>
+      </li> {% endcomment %}
     {% endif %}
   {% endfor %}
 </ul>

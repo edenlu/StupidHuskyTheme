@@ -7,6 +7,10 @@
   <meta name="theme-color" content="{{ settings.color_button }}">
   <link rel="canonical" href="{{ canonical_url }}">
 
+  {% if template == 'index' %}
+    {{ 'custom-style.scss' | asset_url  | stylesheet_tag }}
+  {% endif %}
+
   {%- if settings.favicon != blank -%}
     <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
   {%- endif -%}
@@ -97,11 +101,12 @@
   {{ content_for_header }}
 </head>
 
-<body class="template-{{ template | split: '.' | first }}">
+{% comment %} added pattern background {% endcomment %}
+<body class="template-{{ template | split: '.' | first }} homepage-background">
 
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
-  <div id="SearchDrawer" class="search-bar drawer drawer--top" role="dialog" aria-modal="true" aria-label="{{ 'general.search.placeholder' | t }}">
+  {% comment %} <div id="SearchDrawer" class="search-bar drawer drawer--top" role="dialog" aria-modal="true" aria-label="{{ 'general.search.placeholder' | t }}">
     <div class="search-bar__table">
       <div class="search-bar__table-cell search-bar__form-wrapper">
         <form class="search search-bar__form" action="{{ routes.search_url }}" method="get" role="search">
@@ -119,7 +124,7 @@
         </button>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
 
   {%- if settings.enable_ajax -%}
     {% include 'cart-popup' %}
